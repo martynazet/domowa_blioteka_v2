@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Domowa biblioteka</title>
+        <style>
+            table, th, tr, td {border: 1px solid black; text-align: center;}
+            
+        </style>
+    </head>
+    <body>
+        <h1>Domowa biblioteka</h1>
+
+        <table>
+            <thead style="background-color:yellow">
+                <th style="width:25%">Tytuł</th>
+                <th style="width:25%">Autor</th>
+                <th style="width:25%">Gatunek</th>
+                <th>Liczba stron</th>
+                <th>Czy przeczytane?</th>
+            </thead>
+            {% for book in library %}
+                <tr>
+                    <td><a href="/library/{{loop.index}}">{{book.title}}</a></td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.genre}}</td>
+                    <td>{{book.pages}}</td>
+                    <td>{{book.read}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div>
+            <h2 ><i>Dodaj nową książkę: </i></h2>
+            <form method="POST" action="/library/">
+                {{form.hidden_tag()}}
+                <table style="border-collapse:collapse">
+                    {% for field in form if field.widget.input_type != 'hidden' %}
+                    <tr>
+                        <th style="width:40%">{{field.label}} {% if field.flags.required %} * {% endif %}</th>
+                        <td>{{field}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <input type="submit" value="Zapisz" style="width:300px">
+            </form>
+        </div>
+
+    </body>
+</html>
