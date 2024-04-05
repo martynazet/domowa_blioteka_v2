@@ -5,9 +5,11 @@ from models_biblioteka import library
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "hatemondays"
 
+
 @app.route("/api/v1/library/", methods=["GET"])
 def library_list_api():
     return jsonify(library.all())
+
 
 @app.route("/api/v1/library/<int:book_id>", methods=["GET"])
 def get_book(book_id):
@@ -15,6 +17,7 @@ def get_book(book_id):
     if not book:
         abort(404)
     return jsonify({"book": book})
+
 
 @app.route("/api/v1/library/", methods=["POST"])
 def create_book():
@@ -31,15 +34,17 @@ def create_book():
     library.create(book)
     return jsonify({"book": book}), 201
 
+
 @app.route("/api/v1/library/<int:book_id>", methods=["DELETE"])
 def delete_book(book_id):
     book = library.get(book_id)
     result = library.delete(book_id)
     if result:
-        return jsonify({"result": f"Usunięto {book["title"]}"})
+        return jsonify({"result": f"Usunieto {book['title']}"})
     else:
         abort(404)
     
+
 @app.route("/api/v1/library/<int:book_id>", methods=["PUT"])
 def update_book(book_id):
     book = library.get(book_id)
@@ -66,14 +71,15 @@ def update_book(book_id):
     library.update(book_id, book)
     return jsonify({"book": book})
 
+
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({"error": "Not found", "status_code": 404}), 404)
 
+
 @app.errorhandler(400)
 def bad_request(error):
     return make_response(jsonify({"error": "Bad request", "status_code": 400}), 400)
-
 
 
 if __name__ == "__main__":
