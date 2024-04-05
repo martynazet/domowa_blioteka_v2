@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 from flask import Flask, request, render_template, redirect, url_for
 from form_biblioteka import LibraryForm
-from models_biblioteka import library
+from models_biblioteka_v1 import library
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "hatemondays"
