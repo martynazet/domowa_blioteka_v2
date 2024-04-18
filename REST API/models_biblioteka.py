@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*
+# -*- coding: utf-8 -*-
 import json
+
 
 class Library:
     def __init__(self):
@@ -10,7 +11,7 @@ class Library:
             self.library = []
 
     def all(self):
-        return self.library
+        return self.library 
     
     def get(self, id):
         book = [book for book in self.all() if book["id"] == id]
@@ -29,6 +30,7 @@ class Library:
     def update(self, id, data):
         book = self.get(id)
         if book:
+            data["id"] = id
             index = self.library.index(book)
             self.library[index] = data
             self.save_all()
@@ -42,5 +44,6 @@ class Library:
             self.save_all()
             return book["title"]
         return False
+
 
 library = Library()

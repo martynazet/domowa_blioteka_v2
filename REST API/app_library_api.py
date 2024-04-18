@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*
+# -*- coding: utf-8 -*-
 from flask import Flask, jsonify, abort, make_response, request
 from models_biblioteka import library
 
@@ -69,6 +69,7 @@ def update_book(book_id):
         "read": data.get("read", book["read"])
     }
     library.update(book_id, book)
+    library.save_all()
     return jsonify({"book": book})
 
 
