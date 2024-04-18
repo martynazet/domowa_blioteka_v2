@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 import json
 
+
 class Library:
     def __init__(self):
         try:
